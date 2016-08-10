@@ -25428,6 +25428,7 @@
 	        isLoading: false
 	      });
 	    }, function (errorMessage) {
+	      that.setState({ isLoading: false });
 	      alert(errorMessage);
 	    });
 	  },

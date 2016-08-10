@@ -2,8 +2,9 @@ var React = require('react');
 
 var Message = React.createClass({
   render: function(){
+    var {temp, location} = this.props;
     return(
-      <h3>It is {this.props.temp} in {this.props.location}</h3>
+      <h3>It is {temp} degrees in {location}</h3>
     )
   }
 });

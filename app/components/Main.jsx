@@ -1,5 +1,6 @@
 var React = require('react');
 var Nav = require('Nav');
+import Chart from './Chart';
 
 
 var Main = (props) => {
@@ -8,6 +9,7 @@ var Main = (props) => {
       <Nav/>
       <h2>Main component</h2>
       {props.children}
+      <Chart/>
     </div>
   );
 }

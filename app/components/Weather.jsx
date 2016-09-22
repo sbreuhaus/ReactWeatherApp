@@ -15,10 +15,15 @@ var Weather = React.createClass({
     var that = this;
 
     this.setState({isLoading: true})
-    openWeatherMap.getTemp(location).then(function(temp){
+    openWeatherMap.getTemp(location).then(function(main){
+      console.log("main ", main);
       that.setState({
         location: location,
-        temp: temp,
+        temp: main.temp,
+        humidity: main.humidity,
+        pressure: main.pressure,
+        tempMin: main.temp_min,
+        tempMax: main.temp_max,
         isLoading: false
       })
     }, function(errorMessage){
@@ -28,13 +33,13 @@ var Weather = React.createClass({
   },
 
   render: function(){
-    var {temp, location, isLoading} = this.state;
-
+    var {temp, location, humidity, isLoading} = this.state;
+    console.log("this should be temp and location ", temp, location);
     function renderMessage(){
       if (isLoading){
         return <h3>Fetching weather...</h3>;
       } else if (temp && location){
-        return <Message temp={temp} location={location}/>;
+        return <Message temp={temp} location={location} humidity={humidity}/>;
 
       }
     }

@@ -7,15 +7,16 @@ console.log(WEATHER_API_KEY.key);
 
 module.exports = {
   getTemp: function(location) {
-    var encodedLocation = encodeURIComponent(location);
-    var url = `${OPEN_WEATHER_MAP_URL}&q=${encodedLocation}`;
+    var encodedLocation = encodeURIComponent(location); // encodes string location properly.  Avoids %20
+    var url = `${OPEN_WEATHER_MAP_URL}&q=${encodedLocation}`; //template literal to add location
 
-    return axios.get(url).then(function(res){
+    return axios.get(url).then(function(res){ //promise for success.  Axios is the promise
       console.log("here is the data", res);
-      if (res.data.cod && res.data.message){
+      if (res.data.cod && res.data.message){ //http status code & error message
         throw new Error(res.data.message)
       } else {
-        return res.data.main.temp;
+        return res.data.main;
+        console.log(res.data.main);
       }
     }, function(res){
       throw new Error(res.data.message);

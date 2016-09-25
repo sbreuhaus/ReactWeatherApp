@@ -2,6 +2,7 @@ var React = require('react');
 var WeatherForm = require('WeatherForm');
 var Message = require('Message');
 var openWeatherMap = require('openWeatherMap');
+import Chart from './Chart';
 
 var Weather = React.createClass({
 
@@ -13,7 +14,6 @@ var Weather = React.createClass({
 
   handleSearch: function(location){
     var that = this;
-
     this.setState({isLoading: true})
     openWeatherMap.getTemp(location).then(function(main){
       console.log("main ", main);
@@ -32,15 +32,22 @@ var Weather = React.createClass({
     })
   },
 
+
   render: function(){
-    var {temp, location, humidity, isLoading} = this.state;
-    console.log("this should be temp and location ", temp, location);
+    var {temp, location, humidity, isLoading,} = this.state;
     function renderMessage(){
+      console.log('inside renderMessage');
       if (isLoading){
         return <h3>Fetching weather...</h3>;
+          console.log("renderMessage if statement");
       } else if (temp && location){
-        return <Message temp={temp} location={location} humidity={humidity}/>;
-
+        console.log("renderMessage else if");
+        return(
+          <div>
+            <Message temp={temp} location={location} humidity={humidity}/>
+            <Chart temp={temp} location={location} humidity={humidity}/>
+          </div>
+        )
       }
     }
 
@@ -50,7 +57,7 @@ var Weather = React.createClass({
         {renderMessage()}
       </div>
     )
-  }
+  } // end of render
 });
 
 module.exports = Weather;

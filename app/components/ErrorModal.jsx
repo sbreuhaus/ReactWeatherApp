@@ -4,7 +4,7 @@ var ErrorModal = React.createClass({
 
   getDefaultProps: function(){
     return{
-      title: 'Error'
+      title: 'Error'  // set title for error-modal
     }
   },
 
@@ -14,7 +14,7 @@ var ErrorModal = React.createClass({
   },
 
   componentDidMount: function(){  // called after DOM renders to trigger modal
-    var modal = new Foundation.Reveal($('#error-modal'));
+    var modal = new Foundation.Reveal($('#error-modal')); // calls on foundation to make new modal.
     modal.open();
   },
 

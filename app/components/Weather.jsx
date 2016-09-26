@@ -63,9 +63,10 @@ var Weather = React.createClass({
     }
 
     function renderError(){   /// conditional for showing modal
+
       if(typeof errorMessage === 'string'){  // if string exists show modal
         return (
-          <ErrorModal/>
+          <ErrorModal message={errorMessage}/>
         )
       }
     }

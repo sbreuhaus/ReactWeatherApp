@@ -6,7 +6,7 @@ var WeatherForm = React.createClass({
     e.preventDefault();  // prevents page from refreshing
 
     var location = this.refs.location.value; // input box value
-    
+
     if (location.length > 0){
       this.refs.location.value = ''; // clears input box when api call is made
       this.props.onSearch(location); //onSearch = handleSearch() from Weather comp
@@ -18,7 +18,7 @@ var WeatherForm = React.createClass({
       <div>
         <form onSubmit={this.onFormSubmit}>
           <input type='text' ref='location' placeholder='enter location'/>
-          <button>Get Weather</button>
+          <button className='button expanded hollow'>Get Weather</button>
         </form>
       </div>
     )

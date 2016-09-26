@@ -1,6 +1,7 @@
 var React = require('react');
 var WeatherForm = require('WeatherForm');
 var Message = require('Message');
+import ErrorModal from './ErrorModal';
 var openWeatherMap = require('openWeatherMap');
 import Chart from './Chart';
 
@@ -13,18 +14,14 @@ var Weather = React.createClass({
 
   handleSearch: function(location){
     var that = this;
-    this.setState({isLoading: true})
+    this.setState({
+      isLoading: true,  // boolean to show "loading"
+      errorMessage: undefined // for error modal.  Clears any earlier error messages
+    })
     openWeatherMap.getTemp(location).then(function(main){
       console.log("main ", main);
-      // let dayWeather1 = main.list[0],
-      //     dayWeather2 = main.list[1],
-      //     dayWeather3 = main.list[2],
-      //     dayWeather4 = main.list[3],
-      //     dayWeather5 = main.list[4],
-      //     dayWeather6 = main.list[5],
-      //     dayWeather7 = main.list[6];
       let dayWeather = [];
-      for (var i = 0; i < main.list.length; i++) {
+      for (var i = 0; i < main.list.length; i++) { // pushes each day object in array
         dayWeather.push(main.list[i]);
       }
       console.log('dayWeather', dayWeather);
@@ -42,17 +39,19 @@ var Weather = React.createClass({
         */
         isLoading: false
       })
-    }, function(errorMessage){
-      that.setState({isLoading: false})
-      alert(errorMessage)
-    })
+    }, function(e){
+      that.setState({
+        isLoading: false,
+        errorMessage: e.message
+      });
+    });
   },
 
   render: function(){
-    var {dayWeather, temp, location, humidity, isLoading,} = this.state;
+    var {dayWeather, temp, location, humidity, isLoading, errorMessage} = this.state;
     function renderMessage(){
       if (isLoading){  // displaying message and chart is dependent on successful api call.
-        return <h3>Fetching weather...</h3>;
+        return <h3 className='text-center'>Fetching weather...</h3>;
       } else if (location){                             // took out temp
         return(
           <div>
@@ -63,10 +62,20 @@ var Weather = React.createClass({
       }
     }
 
+    function renderError(){   /// conditional for showing modal
+      if(typeof errorMessage === 'string'){  // if string exists show modal
+        return (
+          <ErrorModal/>
+        )
+      }
+    }
+
     return(
       <div>
+        <h1 className='text-center'>Get Weather</h1>
         <WeatherForm onSearch={this.handleSearch}/>
         {renderMessage()}
+        {renderError()}
       </div>
     )
   } // end of render

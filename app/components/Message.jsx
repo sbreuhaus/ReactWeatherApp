@@ -3,7 +3,7 @@ var React = require('react');
 var Message = ({temp, location, humidity}) => {
   // console.log('temp in message comp = ',temp);
   return(
-    <h3>It is currently {temp} degrees in {location} with {humidity} % humidity</h3>
+    <p className='text-centered'>It is currently {temp} degrees in {location} with {humidity} % humidity</p>
   )
 }
 

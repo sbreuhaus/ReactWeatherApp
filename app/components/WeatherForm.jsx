@@ -6,8 +6,7 @@ var WeatherForm = React.createClass({
     e.preventDefault();  // prevents page from refreshing
 
     var location = this.refs.location.value; // input box value
-    console.log(location);
-
+    
     if (location.length > 0){
       this.refs.location.value = ''; // clears input box when api call is made
       this.props.onSearch(location); //onSearch = handleSearch() from Weather comp

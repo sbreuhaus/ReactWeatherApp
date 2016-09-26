@@ -5,7 +5,6 @@ var openWeatherMap = require('openWeatherMap');
 import Chart from './Chart';
 
 var Weather = React.createClass({
-
   getInitialState: function(){
     return {
       isLoading: false
@@ -17,13 +16,30 @@ var Weather = React.createClass({
     this.setState({isLoading: true})
     openWeatherMap.getTemp(location).then(function(main){
       console.log("main ", main);
+      // let dayWeather1 = main.list[0],
+      //     dayWeather2 = main.list[1],
+      //     dayWeather3 = main.list[2],
+      //     dayWeather4 = main.list[3],
+      //     dayWeather5 = main.list[4],
+      //     dayWeather6 = main.list[5],
+      //     dayWeather7 = main.list[6];
+      let dayWeather = [];
+      for (var i = 0; i < main.list.length; i++) {
+        dayWeather.push(main.list[i]);
+      }
+      console.log('dayWeather', dayWeather);
       that.setState({
         location: location,
+        dayWeather: dayWeather,
+        temp: dayWeather[0].temp.day,
+        humidity: dayWeather[0].humidity,
+        /* orignal 1 dayWeatherWeather api call
         temp: main.temp,
         humidity: main.humidity,
         pressure: main.pressure,
         tempMin: main.temp_min,
         tempMax: main.temp_max,
+        */
         isLoading: false
       })
     }, function(errorMessage){
@@ -32,20 +48,16 @@ var Weather = React.createClass({
     })
   },
 
-
   render: function(){
-    var {temp, location, humidity, isLoading,} = this.state;
+    var {dayWeather, temp, location, humidity, isLoading,} = this.state;
     function renderMessage(){
-      console.log('inside renderMessage');
-      if (isLoading){
+      if (isLoading){  // displaying message and chart is dependent on successful api call.
         return <h3>Fetching weather...</h3>;
-          console.log("renderMessage if statement");
-      } else if (temp && location){
-        console.log("renderMessage else if");
+      } else if (location){                             // took out temp
         return(
           <div>
             <Message temp={temp} location={location} humidity={humidity}/>
-            <Chart temp={temp} location={location} humidity={humidity}/>
+            <Chart dayWeather={dayWeather} location={location}/>
           </div>
         )
       }

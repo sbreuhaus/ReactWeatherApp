@@ -12,12 +12,12 @@ module.exports = {
 
     return axios.get(url).then(function(res){ //promise for success.  Axios is the promise
       console.log("here is the data", res);
-      
-      if (res.data.cod && res.data.message){ //http status code & error message
+
+      if (res.data.cod !== "200"){ //http status code & error message
         throw new Error(res.data.message)
       } else {
-        return res.data.main;
-        console.log(res.data.main);
+        return res.data;
+        console.log(res.data);
       }
     }, function(res){
       throw new Error(res.data.message);

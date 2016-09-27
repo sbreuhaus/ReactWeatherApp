@@ -5,8 +5,8 @@ var {Link} = require('react-router');
 var About = (props) => {
   return(
     <div>
-      <h1 className='text-center'>About</h1>
-      <p>This is an app built on Node, React and Foundation. It Utilizes openweathermaps.com
+      <h1 className='text-center page-title'>About</h1>
+      <p>This is an app built on React, Highcharts and Foundation. It Utilizes openweathermaps.com
       to get a seven day forecast for any city around the world.</p>
       <ul>
         <li>

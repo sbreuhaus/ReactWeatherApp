@@ -6,7 +6,7 @@ var Chart = React.createClass({
   getInitialState: function(){
     return {
       title: {text: "Stephen's Weather App"},
-      subtitle: {text: 'Here is your 7 day forecast'},
+      subtitle: {text: '7 day highs'},
       xAxis: {categories: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7']},
       series: [{
         name: 'City',
@@ -23,7 +23,7 @@ var Chart = React.createClass({
     let temp;
     chart.series[0].data.splice(0, 1); // loops through forecast array and pushed temps into data config
         for (var i = 0; i < dayWeather.length; i++) {
-        temp = dayWeather[i].temp.day;
+        temp = dayWeather[i].temp.max;
         chart.series[0].data.push(temp);
     };
 

@@ -4,7 +4,7 @@ var express = require('express');
 var app = express();
 const PORT = process.env.PORT || 3000; //variable to rep what ever port Heroku gives
 
-app.use(function(req, res, next){
+app.use(function(req, res, next){ //openweathermap only supports http traffic
   if (req.headers['x-forwarded-proto'] === 'http') { //check if equal to http
     next();
   } else {

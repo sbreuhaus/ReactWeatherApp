@@ -6,11 +6,10 @@ var About = (props) => {
   return(
     <div>
       <h1 className='text-center page-title'>About</h1>
-      <p>This is an app built on React, Highcharts and Foundation. It Utilizes openweathermaps.com
-      to get a seven day forecast for any city around the world.</p>
+      <p>This is simple app built on Node, React, and Foundation.  It Utilizes openweathermap.org to retrieve data and display the 7 day tempeature highs as well as the current weather data in a table below.</p>
       <ul>
         <li>
-          <a href='https://github.com/sbreuhaus/ReactWeatherApp'>View the souce code on Github!</a>
+          <a href='https://github.com/sbreuhaus/ReactWeatherApp/tree/chart'>View the souce code on Github!</a>
         </li>
       </ul>
     </div>
